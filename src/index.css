@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&display=swap');
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -10,4 +12,189 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.f12 {
+  font-size: 12px;
+}
+
+.f14 {
+  font-size: 14px;
+}
+
+.w500 {
+  font-weight: 500;
+}
+
+.w700 {
+  font-weight: 700;
+}
+
+.w900 {
+  font-weight: 900;
+}
+
+#app {
+  height: 100vh;
+}
+
+#wallet {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+#balance {
+  font-size: 14px;
+}
+
+.link-text {
+  display: flex;
+  text-decoration: none;
+  color: #000000;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+#items {
+  display: flex;
+}
+
+.item {
+  width: 25%;
+}
+
+.content {
+  width: 85%;
+  height: 40vh;
+}
+
+.item-image {
+  height: 60%;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: flex-end;
+}
+
+.place-bid {
+  background-color: #65656525;
+  backdrop-filter: blur(40px);
+  color: #ffffff;
+  font-size: 12px;
+  border: none;
+  font-weight: 500;
+}
+
+#cbd {
+  display: flex;
+  justify-content: space-between;
+  color: #858585;
+  font-size: 2vh;
+}
+
+#cbd-val {
+  display: flex;
+  justify-content: space-between;
+  color: #000000;
+  font-size: 2vh;
+  font-weight: 500;
+}
+
+.right-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+label {
+  font-weight: 500; 
+}
+
+#image-preview {
+  display: flex;
+  flex-direction: row;
+}
+
+#item-images {
+  height: 60vh;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+#left-images {
+  display: flex;
+  flex-direction: column;
+}
+
+.left-img {
+  max-height: 20%;
+  cursor: pointer;
+}
+
+#selected {
+  border: #4073c4 solid 3px;
+}
+
+#back {
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#back-link {
+  color: #000000;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+#item-name {
+  font-size: 30px;
+}
+
+#price {
+  font-size: 35px;
+}
+
+#place-bid-btn {
+  border: none;
+  color: #ffffff;
+  background-color: #4073c4;
+  font-size: 14px;
+}
+
+#background {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  width: 100vw;
+  background-color: #15151555;
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#modal {
+  background-color: #ffffff;
+}
+
+#modal-title {
+  font-size: 20px;
+}
+
+#close {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+#close-btn {
+  font-weight: 500;
+  border: none;
+  background-color: #ffffff;
 }
