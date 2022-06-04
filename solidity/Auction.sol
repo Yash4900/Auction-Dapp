@@ -4,7 +4,7 @@ contract Auction {
     Item[] public items;
 
     function startAuction(string memory _item_name, string memory _item_desc, string memory _images, uint _item_baseprice, uint _increment_by, uint _deadline) public {
-        Item item = new Item(_item_name, _item_desc, _images, _item_baseprice, _increment_by, _deadline);
+        Item item = new Item(_item_name, _item_desc, _images, _item_baseprice, _increment_by, _deadline, msg.sender);
         items.push(item);
     }
 
@@ -15,6 +15,7 @@ contract Auction {
 
 contract Item {
 
+    enum Status {sold, unsold, moneyclaimed}
     string item_name;
     string item_desc;
     string images;
@@ -22,14 +23,18 @@ contract Item {
     uint increment_by;
     uint deadline;
     address highest_bidder;
+    address owner;
+    Status status; 
 
-    constructor (string memory _item_name, string memory _item_desc, string memory _images, uint _item_baseprice, uint _increment_by, uint _deadline) public {
+    constructor (string memory _item_name, string memory _item_desc, string memory _images, uint _item_baseprice, uint _increment_by, uint _deadline, address _owner) public {
         item_name = _item_name;
         item_desc = _item_desc;
         images = _images;
         current_bid = _item_baseprice;
         increment_by = _increment_by;
         deadline = _deadline;
+        owner = _owner;
+        status = Status.unsold;
     }
 
     function getItemDetails() public view returns(string memory itemName, string memory itemDesc, string memory images, uint currentBid, uint incBy, uint deadline, address highestBidder) {

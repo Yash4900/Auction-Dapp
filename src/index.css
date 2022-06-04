@@ -198,3 +198,11 @@ label {
   border: none;
   background-color: #ffffff;
 }
+
+#address {
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80%;
+}
