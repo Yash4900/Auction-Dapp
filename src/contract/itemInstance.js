@@ -16,12 +16,69 @@ const abi = [
     "type": "function"
   },
   {
+    "constant": true,
+    "inputs": [],
+    "name": "getItemDetails",
+    "outputs": [
+      {
+        "name": "itemName",
+        "type": "string"
+      },
+      {
+        "name": "itemDesc",
+        "type": "string"
+      },
+      {
+        "name": "itemImages",
+        "type": "string"
+      },
+      {
+        "name": "currentBid",
+        "type": "uint256"
+      },
+      {
+        "name": "incBy",
+        "type": "uint256"
+      },
+      {
+        "name": "itemDeadline",
+        "type": "uint256"
+      },
+      {
+        "name": "highestBidder",
+        "type": "address"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "constant": false,
     "inputs": [],
     "name": "claimAmount",
     "outputs": [],
     "payable": true,
     "stateMutability": "payable",
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [
+      {
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "name": "bidders",
+    "outputs": [
+      {
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "payable": false,
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -58,63 +115,6 @@ const abi = [
     "payable": false,
     "stateMutability": "nonpayable",
     "type": "constructor"
-  },
-  {
-    "constant": true,
-    "inputs": [
-      {
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "name": "bidders",
-    "outputs": [
-      {
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "constant": true,
-    "inputs": [],
-    "name": "getItemDetails",
-    "outputs": [
-      {
-        "name": "itemName",
-        "type": "string"
-      },
-      {
-        "name": "itemDesc",
-        "type": "string"
-      },
-      {
-        "name": "images",
-        "type": "string"
-      },
-      {
-        "name": "currentBid",
-        "type": "uint256"
-      },
-      {
-        "name": "incBy",
-        "type": "uint256"
-      },
-      {
-        "name": "deadline",
-        "type": "uint256"
-      },
-      {
-        "name": "highestBidder",
-        "type": "address"
-      }
-    ],
-    "payable": false,
-    "stateMutability": "view",
-    "type": "function"
   }
 ];
 
