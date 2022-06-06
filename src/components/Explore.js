@@ -1,7 +1,32 @@
 import React, { Component } from 'react';
-import items from './items';
 import Item  from './Item';
+import auctionInstance from '../contract/contractInstance.js';
+import itemInstance from '../contract/itemInstance.js';
+
 export class Explore extends Component {
+
+  constructor() {
+    super();
+    // this.state({
+    //   items: []
+    // })
+  }
+
+  componentDidMount() {
+    this.fetchItems();
+  }
+
+  fetchItems = () => {
+    auctionInstance.methods.getAllAuctions().call().then((items) => {
+      items.forEach(address => {
+        const instance = itemInstance(address);
+        instance.methods.getItemDetails().call().then((itemData) => {
+          console.log(itemData);
+        })
+      });
+    })
+  }
+
   render() {
     return (
       <div className="m-3">
@@ -10,7 +35,7 @@ export class Explore extends Component {
         </div>
         <div id="items">
           {
-            items.map((item) => (<Item key={item.id} item={item} ></Item>))
+            // items.map((item, index) => (<Item key={index} item={item} ></Item>))
           }
         </div>
       </div>

@@ -18,7 +18,7 @@ function ConfirmationModal(props) {
           &nbsp;
           &nbsp;
           &nbsp;
-          <button className="btn btn-success px-5 f14">Yes</button>
+          <button className="btn btn-success px-5 f14" onClick={props.onYesClick}>Yes</button>
         </div>
       </div>
     </div>

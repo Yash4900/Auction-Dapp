@@ -35,13 +35,13 @@ contract Item {
         owner = _owner;
     }
 
-    function getItemDetails() public view returns(string memory itemName, string memory itemDesc, string memory images, uint currentBid, uint incBy, uint deadline, address highestBidder) {
+    function getItemDetails() public view returns(string memory itemName, string memory itemDesc, string memory itemImages, uint currentBid, uint incBy, uint itemDeadline, address highestBidder) {
         itemName = item_name;
         itemDesc = item_desc;
-        images = images;
+        itemImages = images;
         currentBid = current_bid;
         incBy = increment_by;
-        deadline = deadline;
+        itemDeadline = deadline;
         highestBidder = highest_bidder;
     }
 

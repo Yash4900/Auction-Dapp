@@ -171,8 +171,8 @@ label {
   position: absolute;
   top: 0px;
   left: 0px;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   background-color: #15151555;
   backdrop-filter: blur(5px);
   display: flex;
@@ -205,4 +205,16 @@ label {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 80%;
+}
+
+#loading {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100vh;
+  width: 100vw;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
