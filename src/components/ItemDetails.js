@@ -2,16 +2,27 @@ import React, { Component } from 'react'
 import back from '../images/back.svg';
 import { Link } from 'react-router-dom';
 import ConfirmationModal from './ConfirmationModal';
+import Loading from './Loading';
 
 export class ItemDetails extends Component {
 
   constructor() {
     super();
     this.state = {
+      loading: true,
+      name: '',
+      description: '',
+      baseprice: '',
+      incBy: '',
+      deadline: '',
       showModal: false,
       imagePtr: 0,
       images: ["https://rukminim1.flixcart.com/image/416/416/ku4ezrk0/painting/3/m/i/30-5-ms-6mm-5p-1730-16227-masstone-original-imag7bnqhsu65cps.jpeg?q=70", "https://rukminim1.flixcart.com/image/416/416/ku4ezrk0/painting/b/g/j/30-5-ms-6mm-5p-1730-16227-masstone-original-imag7bnqspbbq8cx.jpeg?q=70", "https://rukminim1.flixcart.com/image/416/416/ku4ezrk0/painting/g/l/l/30-5-ms-6mm-5p-1730-16227-masstone-original-imag7bnqqfdaqpqj.jpeg?q=70"]
     }
+  }
+
+  componentDidMount() {
+    this.fetchItemData();
   }
 
   changePreviewImage(index) {
@@ -23,6 +34,7 @@ export class ItemDetails extends Component {
   }
 
   render() {
+    if (this.state.loading) return <Loading />
     return (
       <>
         <div id="back" className="bg-light py-3">

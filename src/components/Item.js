@@ -8,7 +8,7 @@ export class Item extends Component {
     return (
       <div className="item">
         <div className="m-2 rounded-3 content shadow-sm">
-          <div className="item-image rounded-3" style={{ backgroundImage: `url(https://ipfs.infura.io/ipfs/${item.images[1]})`, backgroundSize: 'cover' }}>
+          <div className="item-image rounded-4" style={{ backgroundImage: `url(https://ipfs.infura.io/ipfs/${item.images[1]})`, backgroundSize: 'cover' }}>
             <NavLink to={`item/${ item.id }`}>
               <button className="place-bid rounded-pill m-2 px-2 py-1 w500">Place a Bid</button>
             </NavLink>
