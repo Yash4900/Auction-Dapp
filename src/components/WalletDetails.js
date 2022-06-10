@@ -7,9 +7,7 @@ class WalletDetails extends Component {
     return (
       <div id="wallet" className="p-4">
         <img src={metamask} height="25vh" alt="metamask" />
-        <br />
-        <div id="address">{this.props.address}</div>
-        <div id="balance" className="w500 my-2">
+        <div id="balance" className="w500 m-2">
           <img src={ethlogo} height="20vh" alt="ethlogo" /> <span>{this.props.balance}</span> ETH
         </div>
       </div>

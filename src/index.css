@@ -6,6 +6,7 @@ body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
+  background: #fff;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -39,10 +40,16 @@ code {
   height: 100vh;
 }
 
+#navigator {
+  height: 7vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 #wallet {
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
 }
 
@@ -56,10 +63,16 @@ code {
   color: #000000;
   cursor: pointer;
   font-size: 14px;
+  align-items: center;
+}
+
+.link-text:hover {
+  color: #000000;
 }
 
 #items {
   display: flex;
+  flex-direction: row;
 }
 
 .item {
@@ -168,6 +181,13 @@ label {
   font-size: 14px;
 }
 
+#claim-amount-btn {
+  border: none;
+  color: #ffffff;
+  background-color: #107154;
+  font-size: 14px;
+}
+
 #background {
   position: absolute;
   top: 0px;
@@ -183,6 +203,7 @@ label {
 
 #modal {
   background-color: #ffffff;
+  width: 30%;
 }
 
 #modal-title {
@@ -200,12 +221,41 @@ label {
   background-color: #ffffff;
 }
 
-#address {
-  font-size: 12px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 80%;
+#links {
+  display: flex;
+  flex-direction: row;
+}
+
+.active {
+  border-bottom: 2px solid #4073c4;
+  color: #4073c4;
+}
+
+#explore-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#filter-label {
+  align-items: center;
+}
+
+#filters {
+  background-color: #eeeeee;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  color: #555555;
+}
+
+#filters:hover {
+  cursor: pointer;
+}
+
+option {
+  padding: 5px;
 }
 
 #loading {
@@ -217,5 +267,33 @@ label {
   background-color: #fff;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+button:disabled {
+  background-color: #cccccc !important; 
+  color: #666666 !important;
+}
+
+.Active {
+  border: 1px solid #e6861990;
+  color:#e68619;
+  background-color: #e6861950;
+}
+
+.Unsold {
+  border: 1px solid #bb121a90;
+  color: #bb121a;
+  background-color: #bb121a50;
+}
+
+.Sold {
+  border: 1px solid #10715490;
+  color: #107154;
+  background-color: #10715450;
+}
+
+#remaining-time {
+  display: flex;
   align-items: center;
 }

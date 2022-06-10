@@ -56,7 +56,7 @@ export class CreateAuction extends Component {
       web3.utils.toWei(this.state.baseprice, 'ether'),
       web3.utils.toWei(this.state.incrementby, 'ether'),
       new Date(this.state.deadline).getTime() / 1000
-    ).send({ from: this.props.address, gas: 900000 }).then((res) => {
+    ).send({ from: this.props.address, gas: 800000 }).then((res) => {
       console.log(res);
     })
     this.setState({ showModal: false });
@@ -71,7 +71,6 @@ export class CreateAuction extends Component {
         <div className="row">
           <div className="col-md-6"> 
             <div id="create-form">
-              <br />
               <form className="f14" onSubmit={this.handleSubmit} encType="multipart/form-data">
                 <div className="form-group my-3">
                   <label for="name">Item Name</label>
@@ -79,7 +78,7 @@ export class CreateAuction extends Component {
                 </div>
                 <div className="form-group my-3">
                   <label for="description">Item description</label>
-                  <textarea className="form-control bg-light" id="description" rows="3" onChange={this.handleFieldChange} placeholder="Enter item description"></textarea>
+                  <textarea className="form-control bg-light" id="description" rows="2" onChange={this.handleFieldChange} placeholder="Enter item description"></textarea>
                 </div>
                 <div className="form-group my-3">
                   <div className="row">
@@ -110,7 +109,6 @@ export class CreateAuction extends Component {
                     )
                   })}
                 </div>
-                <br />
                 <br />
                 <div className="form-group">
                   <input type="submit" className="btn btn-sm btn-outline-dark" name="submit" id="submit" value="Start Auction" />
