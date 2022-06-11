@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import painting from '../images/girl-painting.svg';
 import ConfirmationModal from './ConfirmationModal';
+import AcknowledgementModal from './AcknowledgementModal';
+import Loading from './Loading';
 import web3 from 'web3';
 import auctionInstance from '../contract/contractInstance.js';
 import ipfs from '../ipfs.js';
@@ -10,14 +12,16 @@ export class CreateAuction extends Component {
   constructor() {
     super();
     this.state = {
-      showModal: false,
+      showConfirmationModal: false,
+      showAcknowledgementModal: false,
       name: '',
       description: '',
       baseprice: '',
       incrementby: '',
       deadline: Date.now(),
       images: [],
-      imageFiles: []
+      imageFiles: [],
+      loading: false
     }
   }
 
@@ -35,14 +39,19 @@ export class CreateAuction extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    this.setState({ showModal: !this.state.showModal });
+    this.setState({ showConfirmationModal: true });
   }
 
-  toggleModal = () => {
-    this.setState({ showModal: !this.state.showModal })
+  toggleConfirmationModal = () => {
+    this.setState({ showConfirmationModal: !this.state.showConfirmationModal })
+  }
+
+  toggleAcknowledgementModal = () => {
+    this.setState({ showAcknowledgementModal: !this.state.showAcknowledgementModal })
   }
 
   startAuction = async () => {
+    this.setState({ showConfirmationModal: false, loading: true });
     let itemimages = "";
     for (var i=0; i<this.state.imageFiles.length; i++) {
       const file = this.state.imageFiles[i];
@@ -58,15 +67,16 @@ export class CreateAuction extends Component {
       new Date(this.state.deadline).getTime() / 1000
     ).send({ from: this.props.address, gas: 800000 }).then((res) => {
       console.log(res);
+      this.setState({ loading: false, name: '', description: '', baseprice: '', incrementby: '', deadline: Date.now(), images: [], imageFiles: [], });
     })
-    this.setState({ showModal: false });
   }
 
   render() {
+    if (this.state.loading) return <Loading />
     return (
       <div className="m-3">
         <div className="title">
-          <h1 className="w900">Sell a product</h1>
+          <h4 className="w900">Enter the product details below!</h4>
         </div>
         <div className="row">
           <div className="col-md-6"> 
@@ -120,7 +130,8 @@ export class CreateAuction extends Component {
             <img src={painting} alt="painting" width="70%" />
           </div>
         </div>
-        {this.state.showModal && <ConfirmationModal title='Alert!' body='Are you sure you want to start auction for this product?' toggleModal={this.toggleModal} onYesClick={this.startAuction} />}
+        {this.state.showConfirmationModal && <ConfirmationModal title='Alert!' body='Are you sure you want to start auction for this product?' toggleModal={this.toggleConfirmationModal} onYesClick={this.startAuction} />}
+        {this.state.showAcknowledgementModal && <AcknowledgementModal title="Success!" body="Item has been placed for auction successfully!" toggleModal={this.toggleAcknowledgementModal} />}
       </div>
     )
   }

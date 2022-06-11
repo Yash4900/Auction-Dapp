@@ -1,5 +1,5 @@
-import React from 'react';
-import { NavLink}  from 'react-router-dom';
+import React from "react";
+import { NavLink } from "react-router-dom";
 
 function NavigationLinks() {
   return (
@@ -7,11 +7,15 @@ function NavigationLinks() {
       <NavLink className="link-text w500 p-3" activeclassname="active" to="/">
         Explore
       </NavLink>
-      <NavLink className="link-text w500 p-3" activeclassname="active" to="/create">
+      <NavLink
+        className="link-text w500 p-3"
+        activeclassname="active"
+        to="/create"
+      >
         Sell a product
       </NavLink>
     </div>
-  )
+  );
 }
 
-export default NavigationLinks
+export default NavigationLinks;

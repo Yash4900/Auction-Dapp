@@ -1,5 +1,5 @@
 import React from "react";
-import hourglass from '../images/hourglass.png';
+import hourglass from "../images/hourglass.png";
 
 class Timer extends React.Component {
   constructor(props) {
@@ -20,9 +20,9 @@ class Timer extends React.Component {
     let seconds = Math.ceil(divisor_for_seconds);
 
     let obj = {
-      "h": hours,
-      "m": minutes,
-      "s": seconds
+      h: hours,
+      m: minutes,
+      s: seconds,
     };
     return obj;
   }
@@ -47,21 +47,20 @@ class Timer extends React.Component {
       seconds: seconds,
     });
 
-    // Check if we're at zero.
     if (seconds === 0) {
       clearInterval(this.timer);
     }
   }
 
   render() {
-    if (this.state.seconds <= 0) { return (<div>Ended</div>) }
-    else {
+    if (this.state.seconds <= 0) {
+      return <div>Ended</div>;
+    } else {
       return (
         <div id="remaining-time">
           <img src={hourglass} alt="hourglass" width="15vh" /> &nbsp;
           {this.state.time.h}h {this.state.time.m}m {this.state.time.s}s
-      </div>
-      
+        </div>
       );
     }
   }

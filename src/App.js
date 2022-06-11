@@ -1,58 +1,63 @@
-import { Route, Routes, BrowserRouter as Router } from 'react-router-dom';
-import NavigationLinks from './components/NavigationLinks';
-import WalletDetails from './components/WalletDetails';
-import Explore from './components/Explore';
-import ItemDetails from './components/ItemDetails';
-import CreateAuction from './components/CreateAuction';
-import web3 from './contract/web3';
-import Loading from './components/Loading';
+import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import NavigationLinks from "./components/NavigationLinks";
+import WalletDetails from "./components/WalletDetails";
+import Explore from "./components/Explore";
+import ItemDetails from "./components/ItemDetails";
+import CreateAuction from "./components/CreateAuction";
+import Loading from "./components/Loading";
+import web3 from "./contract/web3";
+import React, { useState, useEffect } from "react";
 
-import React, { Component } from 'react'
+function App() {
+  const [loading, setLoading] = useState(true);
+  const [address, setAddress] = useState();
+  const [balance, setBalance] = useState();
 
-export class App extends Component {
-
-  constructor() {
-    super();
-    this.state = {
-      loading: true,
-      address: '',
-      balance: 0
-    }
-  }
-
-  componentDidMount() {
-    this.fetchWalletData();
-  }
-
-  async fetchWalletData() {
+  const fetchWalletData = async () => {
+    setLoading(true);
     const addresses = await web3.eth.getAccounts();
-    var balance = await web3.eth.getBalance(addresses[1]);
-    balance = Math.round(web3.utils.fromWei(balance, 'ether') * 100) / 100;
-    this.setState({ address: addresses[1], balance: balance, loading: false });
-  }
+    var bal = await web3.eth.getBalance(addresses[1]);
+    bal = Math.round(parseFloat(web3.utils.fromWei(bal, "ether")) * 100) / 100;
+    setAddress(addresses[1]);
+    setBalance(bal);
+    setLoading(false);
+  };
 
-  render() {
-    if (this.state.loading) return <Loading />
-    return (
-      <Router>
-        <div className="container col-md-10">
-          <div id="app">
-            <div id="navigator">
-              <WalletDetails address={this.state.address} balance={this.state.balance} />
-              <NavigationLinks />
-            </div>
-            <div>
-              <Routes>
-                <Route exact path="/" element={<Explore address={this.state.address} balance={this.state.balance} />} />
-                <Route path="/item/:id" element={<ItemDetails address={this.state.address} balance={this.state.balance} />} />
-                <Route path="/create" element={<CreateAuction address={this.state.address} balance={this.state.balance} />} />
-              </Routes>
-            </div>
+  useEffect(() => {
+    fetchWalletData();
+  }, [balance]);
+
+  return loading ? (
+    <Loading />
+  ) : (
+    <Router>
+      <div className="container col-md-10">
+        <div id="app">
+          <div id="navigator">
+            <WalletDetails address={address} balance={balance} />
+            <NavigationLinks />
+          </div>
+          <div>
+            <Routes>
+              <Route
+                exact
+                path="/"
+                element={<Explore address={address} balance={balance} />}
+              />
+              <Route
+                path="/item/:id"
+                element={<ItemDetails address={address} balance={balance} />}
+              />
+              <Route
+                path="/create"
+                element={<CreateAuction address={address} balance={balance} />}
+              />
+            </Routes>
           </div>
         </div>
-      </Router>
-    )
-  }
+      </div>
+    </Router>
+  );
 }
 
 export default App;
