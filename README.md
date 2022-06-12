@@ -3,7 +3,20 @@
 ## About
 A simple Ethereum blockchain based auctioning platform where sellers can put their items for sale and buyers can bid for the items keeping their Ethers at stake. Seller can claim the amount for their sold items.
 
+## Preview
+
+<img src="https://github.com/Yash4900/Auction-Dapp/blob/main/screenshots/Capture1.PNG" />
+
+**Create Auction**
+
+<img src="https://github.com/Yash4900/Auction-Dapp/blob/main/screenshots/StartAuction.gif" />
+
+**Place Bid**
+
+<img src="https://github.com/Yash4900/Auction-Dapp/blob/main/screenshots/PlaceBid.gif" />
+
 ## Built using
+
 ### <img src="https://upload.wikimedia.org/wikipedia/commons/9/98/Solidity_logo.svg" width="12px" /> Solidity
 Programming language for Smart Contracts on Ethereum blockchain
 
