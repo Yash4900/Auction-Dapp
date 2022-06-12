@@ -10,7 +10,8 @@ export class Explore extends Component {
     super();
     this.state = {
       items: [],
-      filter: "All Items",
+      filter: "All",
+      search: ""
     };
   }
 
@@ -19,11 +20,18 @@ export class Explore extends Component {
   }
 
   handleFilterChange = (e) => {
-    this.setState({ filter: e.target.value });
+    const prevActive = document.getElementsByClassName('active-category-btn');
+    prevActive[0].classList.remove('active-category-btn');
+    document.getElementById(e.target.id).classList.add('active-category-btn');
+    this.setState({ filter: e.target.id });
   };
 
+  handleSearchQueryChange = (e) => {
+    this.setState({ search: e.target.value });
+  }
+
   show = (item) => {
-    if (this.state.filter === "All Items") {
+    if (this.state.filter === "All") {
       return true;
     } else if (this.state.filter === "My Auctions") {
       return this.props.address === item.owner;
@@ -73,29 +81,27 @@ export class Explore extends Component {
 
   render() {
     return (
-      <div className="my-2">
-        <div id="explore-header" className="my-3">
+      <div className="mt-4 row">
+        <div className="col-md-2">
           <div id="filter" className="f14">
-            <img className="m-2" src={filter} alt="filter" width="12vh" />
-            <select
-              name="filters"
-              id="filters"
-              onChange={this.handleFilterChange}
-            >
-              <option value="All Items">All Items</option>
-              <option value="My Auctions">My Auctions</option>
-              <option value="Bidded Items">Bidded Items</option>
-            </select>
+            <button className="category-btn active-category-btn" id="All" onClick={this.handleFilterChange}>All Items</button>
+            <button className="category-btn" id="Auctioned" onClick={this.handleFilterChange}>Auctioned</button>
+            <button className="category-btn" id="Bids" onClick={this.handleFilterChange}>Bids</button>
           </div>
         </div>
-        <div id="items">
-          {this.state.items.map((item, index) => {
-            if (this.show(item)) {
-              return <Item key={item.id} item={item}></Item>;
-            } else {
-              return null;
-            }
-          })}
+        <div className="col-md-10">
+          <div className="mb-2">
+            <input type="text" placeholder="Search..." id="search" className="f14 p-2 rounded" onChange={this.handleSearchQueryChange}/>
+          </div>
+          <div id="items">
+            {this.state.items.map((item, index) => {
+              if (this.show(item) && item.name.toLowerCase().includes(this.state.search)) {
+                return <Item key={item.id} item={item}></Item>;
+              } else {
+                return null;
+              }
+            })}
+          </div>
         </div>
       </div>
     );

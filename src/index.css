@@ -57,6 +57,11 @@ code {
   font-size: 14px;
 }
 
+#address {
+  font-size: 12px;
+  color: #757575;
+}
+
 .link-text {
   display: flex;
   text-decoration: none;
@@ -73,6 +78,7 @@ code {
 #items {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .item {
@@ -242,16 +248,10 @@ label {
   align-items: center;
 }
 
-#filters {
-  background-color: #eeeeee;
-  border: none;
-  padding: 5px;
-  border-radius: 5px;
-  color: #555555;
-}
-
-#filters:hover {
-  cursor: pointer;
+#filter {
+  display: flex;
+  flex-direction: column;
+  padding-right: 30px;
 }
 
 option {
@@ -296,4 +296,21 @@ button:disabled {
 #remaining-time {
   display: flex;
   align-items: center;
+}
+
+#search {
+  border: none;
+  background-color: #eeeeee;
+}
+
+.category-btn {
+  border: none;
+  background-color: #fff;
+  padding: 10px;
+  text-align: left;
+}
+
+.active-category-btn {
+  color: tomato;
+  border-bottom: 2px solid tomato;
 }
