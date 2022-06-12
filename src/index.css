@@ -87,7 +87,7 @@ code {
 
 .content {
   width: 85%;
-  height: 40vh;
+  height: 45vh;
 }
 
 .item-image {
@@ -110,14 +110,14 @@ code {
   display: flex;
   justify-content: space-between;
   color: #858585;
-  font-size: 2vh;
+  font-size: 12px;
 }
 
 #cbd-val {
   display: flex;
   justify-content: space-between;
   color: #000000;
-  font-size: 2vh;
+  font-size: 12px;
   font-weight: 500;
 }
 

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import Item from "./Item";
 import auctionInstance from "../contract/contractInstance.js";
 import itemInstance from "../contract/itemInstance.js";
-import filter from "../images/filter.png";
 import web3 from "web3";
 
 export class Explore extends Component {
@@ -33,7 +32,7 @@ export class Explore extends Component {
   show = (item) => {
     if (this.state.filter === "All") {
       return true;
-    } else if (this.state.filter === "My Auctions") {
+    } else if (this.state.filter === "Auctioned") {
       return this.props.address === item.owner;
     } else {
       return item.hasBidded;
@@ -60,6 +59,7 @@ export class Explore extends Component {
                     name: itemData.itemName,
                     description: itemData.itemDesc,
                     images: itemData.itemImages.split(" "),
+                    basePrice: web3.utils.fromWei(itemData.basePrice, "ether"),
                     currentBid: web3.utils.fromWei(
                       itemData.currentBid,
                       "ether"

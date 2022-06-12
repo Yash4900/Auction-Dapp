@@ -67,7 +67,7 @@ export class CreateAuction extends Component {
       new Date(this.state.deadline).getTime() / 1000
     ).send({ from: this.props.address, gas: 800000 }).then((res) => {
       console.log(res);
-      this.setState({ loading: false, name: '', description: '', baseprice: '', incrementby: '', deadline: Date.now(), images: [], imageFiles: [], });
+      this.setState({ loading: false, name: '', description: '', baseprice: '', incrementby: '', deadline: Date.now(), images: [], imageFiles: [], showAcknowledgementModal: true});
     })
   }
 

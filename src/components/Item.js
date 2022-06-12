@@ -23,13 +23,14 @@ function Item(props) {
           </NavLink>
         </div>
         <p className="m-2 w700">{item.name}</p>
-        <div className="m-2" id="cbd">
+        <p className=" m-2 f12 w500">Baseprice <b className="f14">{item.basePrice}</b> ETH</p>
+        <div className="mx-2" id="cbd">
           <div>Current Bid</div>
           <div>Ending in</div>
         </div>
-        <div className="m-2" id="cbd-val">
+        <div className="mx-2" id="cbd-val">
           <div id="current-bid">
-            <img src={ethereum} alt="ethereum" width="16vh" />
+            <img src={ethereum} alt="ethereum" width="14vh" />
             {item.currentBid} ETH
           </div>
           <Timer seconds={item.deadline - parseInt(Date.now() / 1000)}></Timer>

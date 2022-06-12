@@ -58,7 +58,7 @@ class Timer extends React.Component {
     } else {
       return (
         <div id="remaining-time">
-          <img src={hourglass} alt="hourglass" width="15vh" /> &nbsp;
+          <img src={hourglass} alt="hourglass" width="14vh" /> &nbsp;
           {this.state.time.h}h {this.state.time.m}m {this.state.time.s}s
         </div>
       );
