@@ -1,59 +1,50 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import Item from "./Item";
 import auctionInstance from "../contract/contractInstance.js";
 import itemInstance from "../contract/itemInstance.js";
 import web3 from "web3";
 
-export class Explore extends Component {
-  constructor() {
-    super();
-    this.state = {
-      items: [],
-      filter: "All",
-      search: ""
-    };
-  }
+function Explore(props) {
+  const [items, setItems] = useState([]);
+  const [filter, setFilter] = useState("All");
+  const [search, setSearch] = useState("");
 
-  componentWillMount() {
-    this.fetchItems();
-  }
-
-  handleFilterChange = (e) => {
-    const prevActive = document.getElementsByClassName('active-category-btn');
-    prevActive[0].classList.remove('active-category-btn');
-    document.getElementById(e.target.id).classList.add('active-category-btn');
-    this.setState({ filter: e.target.id });
-  };
-
-  handleSearchQueryChange = (e) => {
-    this.setState({ search: e.target.value });
-  }
-
-  show = (item) => {
-    if (this.state.filter === "All") {
+  const show = (item) => {
+    if (filter === "All") {
       return true;
-    } else if (this.state.filter === "Auctioned") {
-      return this.props.address === item.owner;
+    } else if (filter === "Auctioned") {
+      return props.address === item.owner;
     } else {
       return item.hasBidded;
     }
   };
 
-  fetchItems = () => {
+  const handleFilterChange = (e) => {
+    const prevActive = document.getElementsByClassName("active-category-btn");
+    prevActive[0].classList.remove("active-category-btn");
+    document.getElementById(e.target.id).classList.add("active-category-btn");
+    setFilter(e.target.id);
+  };
+
+  const handleSearchQueryChange = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const fetchItems = () => {
     let index = 0;
     auctionInstance.methods
       .getAllAuctions()
       .call()
-      .then((items) => {
-        items.forEach(async (address) => {
+      .then((products) => {
+        products.forEach(async (address) => {
           const instance = itemInstance(address);
-          const bid = await instance.methods.bidders(this.props.address).call();
+          const bid = await instance.methods.bidders(props.address).call();
           instance.methods
             .getItemDetails()
             .call()
             .then((itemData) => {
-              this.setState({
-                items: [
+              setItems((prev) => {
+                return [
                   {
                     id: index,
                     name: itemData.itemName,
@@ -70,8 +61,8 @@ export class Explore extends Component {
                     owner: itemData.itemOwner,
                     hasBidded: bid !== "0",
                   },
-                  ...this.state.items,
-                ],
+                  ...prev,
+                ];
               });
               index = index + 1;
             });
@@ -79,33 +70,59 @@ export class Explore extends Component {
       });
   };
 
-  render() {
-    return (
-      <div className="mt-4 row">
-        <div className="col-md-2">
-          <div id="filter" className="f14">
-            <button className="category-btn active-category-btn" id="All" onClick={this.handleFilterChange}>All Items</button>
-            <button className="category-btn" id="Auctioned" onClick={this.handleFilterChange}>Auctioned</button>
-            <button className="category-btn" id="Bids" onClick={this.handleFilterChange}>Bids</button>
-          </div>
-        </div>
-        <div className="col-md-10">
-          <div className="mb-2">
-            <input type="text" placeholder="Search..." id="search" className="f14 p-2 rounded" onChange={this.handleSearchQueryChange}/>
-          </div>
-          <div id="items">
-            {this.state.items.map((item, index) => {
-              if (this.show(item) && item.name.toLowerCase().includes(this.state.search)) {
-                return <Item key={item.id} item={item}></Item>;
-              } else {
-                return null;
-              }
-            })}
-          </div>
+  useEffect(() => {
+    fetchItems();
+  }, []);
+
+  return (
+    <div className="mt-4 row">
+      <div className="col-md-2">
+        <div id="filter" className="f14">
+          <button
+            className="category-btn active-category-btn"
+            id="All"
+            onClick={(e) => handleFilterChange(e)}
+          >
+            All Items
+          </button>
+          <button
+            className="category-btn"
+            id="Auctioned"
+            onClick={(e) => handleFilterChange(e)}
+          >
+            Auctioned
+          </button>
+          <button
+            className="category-btn"
+            id="Bids"
+            onClick={(e) => handleFilterChange(e)}
+          >
+            Bids
+          </button>
         </div>
       </div>
-    );
-  }
+      <div className="col-md-10">
+        <div className="mb-2">
+          <input
+            type="text"
+            placeholder="Search..."
+            id="search"
+            className="f14 p-2 rounded"
+            onChange={(e) => handleSearchQueryChange(e)}
+          />
+        </div>
+        <div id="items">
+          {items.map((item) => {
+            if (show(item) && item.name.toLowerCase().includes(search)) {
+              return <Item key={item.id} item={item}></Item>;
+            } else {
+              return null;
+            }
+          })}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Explore;

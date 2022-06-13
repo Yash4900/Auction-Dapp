@@ -1,4 +1,4 @@
-import { Route, Routes, BrowserRouter as Router } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import NavigationLinks from "./components/NavigationLinks";
 import WalletDetails from "./components/WalletDetails";
 import Explore from "./components/Explore";
@@ -25,12 +25,11 @@ function App() {
 
   useEffect(() => {
     fetchWalletData();
-  }, [balance]);
+  }, []);
 
   return loading ? (
     <Loading />
   ) : (
-    <Router>
       <div className="container col-md-10">
         <div id="app">
           <div id="navigator">
@@ -45,18 +44,18 @@ function App() {
                 element={<Explore address={address} balance={balance} />}
               />
               <Route
-                path="/item/:id"
+                exact path="/item/:id"
                 element={<ItemDetails address={address} balance={balance} />}
               />
               <Route
-                path="/create"
+                exact path="/create"
                 element={<CreateAuction address={address} balance={balance} />}
               />
             </Routes>
           </div>
         </div>
       </div>
-    </Router>
+  
   );
 }
 
