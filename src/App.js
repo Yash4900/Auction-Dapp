@@ -16,9 +16,9 @@ function App() {
   const fetchWalletData = async () => {
     setLoading(true);
     const addresses = await web3.eth.getAccounts();
-    var bal = await web3.eth.getBalance(addresses[1]);
+    var bal = await web3.eth.getBalance(addresses[2]);
     bal = Math.round(parseFloat(web3.utils.fromWei(bal, "ether")) * 100) / 100;
-    setAddress(addresses[1]);
+    setAddress(addresses[2]);
     setBalance(bal);
     setLoading(false);
   };
